@@ -15,11 +15,11 @@ async def stream(
     subscription_payload: str
 ) -> None:
     """
-    Sets up a connection with the server which is pushing new odds to the OddsView website.
+    Sets up a connection with the server which is pushing new odds to the [REDACTED] website.
     Awaits further updates. As soon as updated odds information arrives it prints all the relevant
     information regarding the specific odds update.
 
-    The function is meant to be called from the live_odds_stream method inside the OddsView class
+    The function is meant to be called from the live_odds_stream method inside the [REDACTED] class
 
     :param uri str: URI for the web server
     :param subscription_payload str: Subscription message to send to the server with info regarding 
@@ -53,16 +53,16 @@ async def stream(
         print(f"Error: {e}")
         print_exc()
 
-class OddsView:
+class OddsStreamer:
     def __init__(self) -> None:
         """
         Initializes a class object
 
         :rtype: None
         """
-        self.live_games_uri = "https://49pzwry2rc.execute-api.us-east-1.amazonaws.com/prod/getLiveGames"
-        self.historical_odds_uri = "https://49pzwry2rc.execute-api.us-east-1.amazonaws.com/prod/getHistoricalOdds"
-        self.ws_uri = "wss://ws.openodds.gg/ws"
+        self.live_games_uri = ""
+        self.historical_odds_uri = ""
+        self.ws_uri = ""
 
     def get_live_games(
         self, 
@@ -157,7 +157,7 @@ class OddsView:
         [await task for task in tasks]
 
 async def main():
-    ov = OddsView()
+    ov = OddsStreamer()
     await ov.live_odds_stream()
 
 if __name__ == "__main__":
